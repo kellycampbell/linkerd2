@@ -51,6 +51,20 @@ metadata:
 				"k8s-version": []string{"v0.0.0-master+$Format:%h$"},
 			},
 		},
+		{
+			"linkerd-viz",
+			[]string{`
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: linkerd-viz
+  creationTimestamp: 2019-02-15T12:34:56Z
+  annotations:
+    linkerd.io/extension: linkerd-viz`},
+			url.Values{
+				"linkerd-viz": []string{"true"},
+			},
+		},
 	}
 
 	ctx := context.Background()

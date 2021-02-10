@@ -42,6 +42,15 @@ func K8sValues(ctx context.Context, kubeAPI *k8s.KubernetesAPI, controlPlaneName
 		v.Set("k8s-version", versionInfo.String())
 	}
 
+	for _, ext := range []string{"linkerd-viz", "linkerd-multicluster", "linkerd-jaeger"} {
+		_, err = kubeAPI.GetNamespaceWithExtensionLabel(ctx, ext)
+		if err != nil {
+			log.Errorf("Failed to fetch extension namespace: %s", err)
+		} else {
+			v.Set(ext, "enabled")
+		}
+	}
+
 	return v
 }
 
